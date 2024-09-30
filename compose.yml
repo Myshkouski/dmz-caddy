@@ -1,0 +1,21 @@
+volumes:
+  caddy_data:
+  caddy_config:
+
+networks:
+  dmz:
+
+services:
+  caddy:
+    build:
+      context: caddy/docker
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+      - 443:443/udp
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      dmz:
